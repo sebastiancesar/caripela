@@ -1,0 +1,86 @@
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-11>
+                <camera-preview [videoSource]="videoSource"></camera-preview>
+            </ion-col>
+            <ion-col col-1>
+                <div class="progress progress-bar-vertical">
+                    <div class="progress-bar progress-bar-success" 
+                        [style.height]="heightBar">                        
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>        
+        <ion-row text-center 
+            [@cheerPoints]="cheerPoints ? true : false"
+            (@cheerPoints.done)="cheerPointsDone($event)">
+            <ion-col>
+                <ion-icon name="happy" 
+                    class="points happy"
+                    [@showPoint]="pointsState[0]"
+                    (@showPoint.done)="showPointDone($event)">
+                </ion-icon>
+            </ion-col>
+            <ion-col>
+                <ion-icon name="bowtie" 
+                    class="points bowtie"
+                    [@showPoint]="pointsState[1]"
+                    (@showPoint.done)="showPointDone($event)">
+                </ion-icon>
+            </ion-col>
+            <ion-col>
+                <ion-icon name="pizza" 
+                    class="points pizza"
+                    [@showPoint]="pointsState[2]"
+                    (@showPoint.done)="showPointDone($event)">                
+                </ion-icon>
+            </ion-col>
+        </ion-row>
+        <ion-row text-center>
+            <ion-col text-center>
+                <span class="pre-face-label">
+                    cara de: &nbsp;&nbsp;
+                </span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span class="face-label" 
+                    [@faceLabel]="faceLabelState"
+                    (@faceLabel.done)="faceLabelDone($event)">
+                    {{faceLabel}} 
+                </span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="clockwatch" text-center>{{countdown}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                Points: <span class="global-points"> {{globalPoints}}</span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-fab left bottom>
+        <button *ngIf="!isPlaying" ion-fab color="secondary" (click)="start()">
+            <ion-icon name="flash"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-fab right bottom>        
+        <button ion-fab color="light" (click)="stop()">
+            <ion-icon name="square"></ion-icon>
+        </button>
+    </ion-fab>
+    <!-- <ion-fab center bottom>
+        <button ion-fab color="light" (click)="incrementPoint()">
+            <ion-icon name="color-wand"></ion-icon>
+        </button>    
+    </ion-fab> -->
+    <!-- <small class="info-predictions">
+        classId: {{lastPrediction.class_id}} -.- 
+        confidence: {{lastPrediction.confidence}}% 
+    </small>  -->
+</ion-content>

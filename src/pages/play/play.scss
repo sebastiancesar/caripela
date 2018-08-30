@@ -1,0 +1,160 @@
+play-page {
+
+    .clockwatch {
+      font-size: 1.8em;
+      color: red;
+    }
+    
+    .face-label {
+      font-family: cursive;
+      font-size: 2.5em;
+      color: black;
+    }
+
+    .pre-face-label {
+      font-size: 1em;
+      color: grey;
+    }
+    
+    .info-predictions {
+      bottom: 0px;
+      position: absolute;
+    }
+    
+    .points {
+      font-size: 3em;
+      // visibility: hidden;
+      &.happy {        
+        color: orange;
+      }
+      &.bowtie {
+        color: mediumblue;
+      }
+      &.pizza {
+        color: indianred
+      }
+    }
+
+    .global-points {
+      font-size: 1.8em;      
+    }
+
+    #webcamholder {
+      width: 100%;
+    }
+    
+    .progress {
+      height: 100%;
+      margin-bottom: 20px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    .progress-bar {
+      float: left;
+      width: 0;
+      height: 100%;
+      font-size: 12px;
+      line-height: 20px;
+      color: #fff;
+      text-align: center;
+      background-color: #337ab7;      
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);    
+      transition: width .6s ease;    
+    }
+
+    .progress-bar-vertical {
+      width: 20px;
+      min-height: 100px;
+      display: flex;
+      align-items: flex-end;
+      margin-right: 20px;
+      float: left;
+    }
+    
+    .progress-bar-vertical .progress-bar {
+      width: 100%;
+      height: 0;
+      transition: height 0.6s ease;
+    }
+    
+    .progress-bar-success {
+      background-color: #5cb85c;
+  }
+
+  // @keyframes zoomInOut {
+  //   0% {
+  //     visibility: visible;
+  //     transform: scale(1,1);
+  //   }
+  //   50% {
+  //     transform: scale(1.6,1.6);
+  //     visibility: visible;
+  //   }
+  //   100% {
+  //     transform: scale(1,1);
+  //     visibility: visible;
+  //   }
+  // }
+
+  // .zoomInOut {
+  //   animation-name: zoomInOut;
+  //   animation-duration: 1s;
+  // }
+
+  // @keyframes bounceOutRight {
+  //   20% {
+  //     opacity: 1;
+  //     transform: translate3d(-20px, 0, 0);
+  //   }
+  
+  //   to {
+  //     opacity: 0;
+  //     transform: translate3d(2000px, 0, 0);
+  //   }
+  // }
+  
+  // .bounceOutRight {
+  //   animation-name: bounceOutRight;
+  // }
+
+  // .animated {
+  //   animation-duration: 1s;
+  //   animation-fill-mode: both;
+  // }
+
+  // @keyframes rubberBand {
+  //   from {
+  //     transform: scale3d(1, 1, 1);
+  //   }
+  
+  //   30% {
+  //     transform: scale3d(1.25, 0.75, 1);
+  //   }
+  
+  //   40% {
+  //     transform: scale3d(0.75, 1.25, 1);
+  //   }
+  
+  //   50% {
+  //     transform: scale3d(1.15, 0.85, 1);
+  //   }
+  
+  //   65% {
+  //     transform: scale3d(0.95, 1.05, 1);
+  //   }
+  
+  //   75% {
+  //     transform: scale3d(1.05, 0.95, 1);
+  //   }
+  
+  //   to {
+  //     transform: scale3d(1, 1, 1);
+  //   }
+  // }
+  
+  // .rubberBand {
+  //   animation-name: rubberBand;
+  // }
+}

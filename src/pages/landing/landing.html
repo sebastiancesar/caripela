@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Landing
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="videoLoaded">
+    <camera-preview [videoSource]="videoSource"></camera-preview>
+  </div>
+  <ion-fab right middle>
+    <button ion-fab color="secondary" (click)="start()">
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab color="default" (click)="reset()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
