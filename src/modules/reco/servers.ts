@@ -16,22 +16,20 @@ export class RecoServerRemote {
 
     addSample (sample, class_id) {
         const data = { sample: sample, class_id: class_id };
-        this.client
-            .emit('backend_add_sample', data);
+        this.client.emit('backend_add_sample', data);
     }
 
-    train () {
+    train () : Promise<void> {
         this.client.emit('backend_train');
+        return new Promise<void>((resolve) => {
+            this.client.on('training_completed', () => {
+                resolve();
+            });
+        });
     }
 
     predict (sample) {
         this.client.emit('backend_predict', { sample: sample });
-    }
-
-    onPredicted (cb) { 
-        this.client.on('server_predicted', (response) => {
-            return cb(response);
-        });
     }
 
     onPredictedObservable () {

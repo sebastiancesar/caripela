@@ -1,7 +1,7 @@
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { GameManager } from '../../modules/game/gameManager';
-import { PlayPage } from '../play/play';
+import { TrainingPage } from '../training/training';
 
 
 @Component({
@@ -11,13 +11,15 @@ import { PlayPage } from '../play/play';
 export class SamplerPage {
         
     private faceLabel: string;    
-    private videoSource: any;
-    private current: Number = 0;
-    private max: Number = 3;
-    private samplesAdded = 0;
+    private videoSource: any;        
     private gameManager: GameManager;
-    navCtrl: NavController;
-    showButton = 'capture';
+    private navCtrl: NavController;
+    private showButton = 'capture';
+
+    // Round timer
+    private current: Number = 0;
+    private max: Number = 10;
+    private capturing = false;
 
     constructor (navCtrl: NavController, gameManager: GameManager) {
         this.navCtrl = navCtrl;
@@ -27,21 +29,26 @@ export class SamplerPage {
     }
 
     capture () {
+        this.capturing = true;
+        this.current = 10;
         this.showButton = '';
         this.gameManager.addSamples(this.faceLabel)
             .then(() => {            
                 console.log('samples added');
-                this.showButton = 'next';
+                this.capturing = false;
+                this.next();
             });
     }
 
     next () {
-        this.faceLabel = this.gameManager.getNextFaceLabel();
-        if (this.faceLabel === 'end') {
-            this.navCtrl.push(PlayPage);
+        this.current = 0;                
+        const nextFace = this.gameManager.getNextFaceLabel();
+        if (nextFace === 'end') {
+            this.navCtrl.push(TrainingPage);
+        } else {
+            this.faceLabel = nextFace;
         }
         this.showButton = 'capture';
     }
-
 }
   

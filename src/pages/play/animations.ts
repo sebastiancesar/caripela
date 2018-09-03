@@ -22,34 +22,40 @@ const rubberBand = animate('1000ms' , keyframes([
     style({ transform: 'scale3d(1, 1, 1)', offset: 1})
 ]));
 
-export const Animations = {
-    showPoint: trigger('showPoint', [
-        state('hiddenPoint', style({ visibility: 'hidden' })),
-        state('visiblePoint', style({ visibility: 'visible' })),
-        transition('hiddenPoint => visiblePoint', 
-            animate('500ms ease-in', keyframes([
-                style({ visibility: 'visible', transform: 'scale(1,1)', offset: 0 }),
-                style({ transform: 'scale(1.6,1.6)', offset: 0.5 }),
-                style({ transform: 'scale(1,1)', offset: 1.0 }),
-            ]))
-        )
-    ]),
-    cheerPoints: trigger('cheerPoints', [
-        transition('false => true', rubberBand)
-    ]),
-    faceLabel: trigger('faceLabel', [       
-        transition('populated => empty', zoomOutUp )
-    ]) 
-}
+// Doesn't work, scale(0.1) rotate(30deg) , too much information.
+const jackInTheBox = animate('1000ms ease-in', keyframes([
+    style({ visibility: 'visible', opacity: 0, 
+            transform: 'scale(0.1) rotate(30deg)',
+            transformOrigin: 'center bottom', offset: 0}),
+    style({ transform: 'rotate(-10deg)', offset: 0.5 }),            
+    style({ transform: 'rotate(3deg)', offset: 0.7 }),
+    style({ opacity: 1, transform: 'scale(1)', offset: 1 })                        
+]));
 
- // state('empty', style({ visibility: 'hidden' })),
-        // state('populated', style({ visibility: 'visible' })),
-        // transition('* => populated',
-        //     animate('300ms', keyframes([
-        //         style({ opacity: 0, transform: 'translate3d(-3000px, 0, 0)', offset: 0}),
-        //         style({ opacity: 1, transform: 'translate3d(25px, 0, 0)', offset: 0.6}),
-        //         style({ transform: 'translate3d(-10px, 0, 0)', offset: 0.75}),
-        //         style({ transform: 'translate3d(5px, 0, 0)', offset: 0.9}),
-        //         style({ transform: 'translate3d(0, 0, 0)', offset: 1}),
-        //     ]))
-        // ),
+const cool = animate('500ms ease-in', keyframes([
+    style({ opacity: 1, transform: 'scale(1,1)', offset: 0 }),
+    style({ transform: 'scale(1.6,1.6)', offset: 0.5 }),
+    style({ opacity: 1, transform: 'scale(1,1)', offset: 1.0 }),
+]));
+
+export const Animations = {    
+    showPoint: [    
+        trigger('showPoint', [
+            state('hiddenPoint', style({ opacity: 0.1 })),
+            state('visiblePoint', style({ opacity: 1 })),
+            transition('hiddenPoint => visiblePoint', cool),        
+    ])],
+    cheerPoints: [        
+        trigger('cheerPoints', [
+            transition('notCheering => cheering', rubberBand)
+    ])],
+    faceLabel: trigger('faceLabel', [
+        transition('populated => empty', zoomOutUp )
+    ]),
+    start: trigger('start', [
+        state('hiddenStart', style({visibility: 'hidden'})),
+        state('visibleStart', style({visibility: 'visible'})),
+        transition('hiddenStart => visibleStart', cool),
+        // transition('visibleStart => hiddenStart', animate('200ms ease-in'))
+    ])
+}

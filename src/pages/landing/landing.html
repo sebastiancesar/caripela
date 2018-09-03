@@ -1,22 +1,20 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Landing
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  <div *ngIf="videoLoaded">
-    <camera-preview [videoSource]="videoSource"></camera-preview>
-  </div>
-  <ion-fab right middle>
-    <button ion-fab color="secondary" (click)="start()">
-      <ion-icon name="arrow-dropright"></ion-icon>
-    </button>
-  </ion-fab>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div *ngIf="videoLoaded" padding-bottom>
+          <camera-preview [videoSource]="videoSource"></camera-preview>
+        </div>
+      </ion-col>    
+    </ion-row>
+    <ion-row>
+      <ion-col padding-top>
+        <button ion-button full (click)="start()">start</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-fab right bottom>
-    <button ion-fab color="default" (click)="reset()">
+    <button ion-fab color="light" (click)="reset()">
       <ion-icon name="refresh"></ion-icon>
     </button>
   </ion-fab>

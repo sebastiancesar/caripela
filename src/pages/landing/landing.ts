@@ -3,6 +3,7 @@ import { Platform } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SamplerPage } from '../sampler/sampler';
 import { PlayPage } from '../play/play';
+import { TrainingPage } from '../training/training';
 import { GameManager } from '../../modules/game/gameManager';
 
 
@@ -17,8 +18,7 @@ export class LandingPage {
     videoLoaded: Boolean = false;
     private gameManager: GameManager;
 
-    constructor (navCtrl: NavController, platform: Platform, 
-        gameManager: GameManager) {
+    constructor (navCtrl: NavController, platform: Platform, gameManager: GameManager) {
         this.navCtrl = navCtrl;
         this.gameManager = gameManager;
         this.gameManager.createNewGame();

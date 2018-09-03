@@ -1,20 +1,21 @@
 play-page {
-
-    .clockwatch {
-      font-size: 1.8em;
-      color: red;
-    }
     
+    .item-md ion-avatar ion-img, .item-md ion-avatar img {
+      width: 80px;
+      height: 80px;
+      border-radius: 0;
+    }
+
     .face-label {
       font-family: cursive;
-      font-size: 2.5em;
+      font-size: 2em;
       color: black;
     }
 
-    .pre-face-label {
-      font-size: 1em;
-      color: grey;
-    }
+    // .pre-face-label {
+    //   font-size: 1em;
+    //   color: grey;
+    // }
     
     .info-predictions {
       bottom: 0px;
@@ -23,7 +24,7 @@ play-page {
     
     .points {
       font-size: 3em;
-      // visibility: hidden;
+      opacity: 0.1;
       &.happy {        
         color: orange;
       }
@@ -36,7 +37,11 @@ play-page {
     }
 
     .global-points {
-      font-size: 1.8em;      
+      font-size: 1.5em;
+      ion-icon {
+        color: yellowgreen;
+        font-size: 1em;
+      }
     }
 
     #webcamholder {
@@ -47,7 +52,7 @@ play-page {
       height: 100%;
       margin-bottom: 20px;
       overflow: hidden;
-      background-color: #f5f5f5;
+      background-color: grey;
       border-radius: 4px;
     }
 
@@ -83,78 +88,4 @@ play-page {
       background-color: #5cb85c;
   }
 
-  // @keyframes zoomInOut {
-  //   0% {
-  //     visibility: visible;
-  //     transform: scale(1,1);
-  //   }
-  //   50% {
-  //     transform: scale(1.6,1.6);
-  //     visibility: visible;
-  //   }
-  //   100% {
-  //     transform: scale(1,1);
-  //     visibility: visible;
-  //   }
-  // }
-
-  // .zoomInOut {
-  //   animation-name: zoomInOut;
-  //   animation-duration: 1s;
-  // }
-
-  // @keyframes bounceOutRight {
-  //   20% {
-  //     opacity: 1;
-  //     transform: translate3d(-20px, 0, 0);
-  //   }
-  
-  //   to {
-  //     opacity: 0;
-  //     transform: translate3d(2000px, 0, 0);
-  //   }
-  // }
-  
-  // .bounceOutRight {
-  //   animation-name: bounceOutRight;
-  // }
-
-  // .animated {
-  //   animation-duration: 1s;
-  //   animation-fill-mode: both;
-  // }
-
-  // @keyframes rubberBand {
-  //   from {
-  //     transform: scale3d(1, 1, 1);
-  //   }
-  
-  //   30% {
-  //     transform: scale3d(1.25, 0.75, 1);
-  //   }
-  
-  //   40% {
-  //     transform: scale3d(0.75, 1.25, 1);
-  //   }
-  
-  //   50% {
-  //     transform: scale3d(1.15, 0.85, 1);
-  //   }
-  
-  //   65% {
-  //     transform: scale3d(0.95, 1.05, 1);
-  //   }
-  
-  //   75% {
-  //     transform: scale3d(1.05, 0.95, 1);
-  //   }
-  
-  //   to {
-  //     transform: scale3d(1, 1, 1);
-  //   }
-  // }
-  
-  // .rubberBand {
-  //   animation-name: rubberBand;
-  // }
 }

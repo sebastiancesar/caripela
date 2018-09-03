@@ -7,29 +7,49 @@
 </ion-header>
 
 <ion-content padding>
-    <camera-preview [videoSource]="videoSource"></camera-preview>
     <ion-grid>
         <ion-row>
-            <ion-col class="face-label" text-center>{{faceLabel}}</ion-col>
+            <ion-col>
+                <camera-preview [videoSource]="videoSource"></camera-preview>
+            </ion-col>
         </ion-row>
-        <!-- <round-progress 
-            [current]="current" 
-            [max]="max"
-            [radius]="'50'">
-        </round-progress> -->
+        <ion-row text-center>
+            <ion-col text-center>
+                <span class="pre-face-label">
+                    cara de: &nbsp;&nbsp;
+                </span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="face-label" text-center>
+                {{faceLabel}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <round-progress 
+                    *ngIf="capturing"
+                    [current]="current" 
+                    [max]="max"
+                    [radius]="30"
+                    [stroke]="5"
+                    [duration]="2000">
+                </round-progress>
+            </ion-col>
+        </ion-row>
     </ion-grid>
-    
+
     <ion-fab right middle>
         <div *ngIf="showButton === 'capture'">
             <button ion-fab color="danger" (click)="capture()">
                 <ion-icon name="camera"></ion-icon>
             </button>
         </div>
-        <div *ngIf="showButton === 'next'">
+        <!-- <div *ngIf="showButton === 'next'">
             <button ion-fab color="secondary" (click)="next()">
                 <ion-icon name="arrow-forward"></ion-icon>
             </button>
-        </div>
+        </div> -->
     </ion-fab>
     <ion-fab right bottom>
         <button ion-fab color="light" (click)="reset()">

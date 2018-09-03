@@ -15,10 +15,6 @@ export class CaptureBrowserService {
       this.canvas.width = IMG_WIDTH;
       this.canvas.height = IMG_HEIGHT;
     }
-  
-    getWebcamElement() {
-      return this.webcamElement;
-    }
 
     capture() {
       let context = this.canvas.getContext('2d');

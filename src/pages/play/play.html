@@ -12,58 +12,62 @@
                 </div>
             </ion-col>
         </ion-row>        
-        <ion-row text-center 
-            [@cheerPoints]="cheerPoints ? true : false"
-            (@cheerPoints.done)="cheerPointsDone($event)">
-            <ion-col>
-                <ion-icon name="happy" 
-                    class="points happy"
-                    [@showPoint]="pointsState[0]"
-                    (@showPoint.done)="showPointDone($event)">
-                </ion-icon>
-            </ion-col>
-            <ion-col>
-                <ion-icon name="bowtie" 
-                    class="points bowtie"
-                    [@showPoint]="pointsState[1]"
-                    (@showPoint.done)="showPointDone($event)">
-                </ion-icon>
-            </ion-col>
-            <ion-col>
-                <ion-icon name="pizza" 
-                    class="points pizza"
-                    [@showPoint]="pointsState[2]"
-                    (@showPoint.done)="showPointDone($event)">                
-                </ion-icon>
-            </ion-col>
-        </ion-row>
-        <ion-row text-center>
-            <ion-col text-center>
-                <span class="pre-face-label">
-                    cara de: &nbsp;&nbsp;
-                </span>
-            </ion-col>
-        </ion-row>
+        
         <ion-row>
-            <ion-col text-center>
-                <span class="face-label" 
-                    [@faceLabel]="faceLabelState"
-                    (@faceLabel.done)="faceLabelDone($event)">
-                    {{faceLabel}} 
-                </span>
+            <ion-card>
+                <ion-item >
+                    <ion-avatar item-start>
+                        <img [src]="faceToGet.img || ''">
+                    </ion-avatar>
+                    <div text-center class="face-label">
+                        {{faceToGet.label || ''}}
+                    </div>
+                    <div class="">
+                        <ion-row text-center 
+                            [@cheerPoints]="cheerPoints ? 'cheering' : 'notCheering'"
+                            (@cheerPoints.done)="cheerPointsDone($event)">
+                            <ion-col>
+                                <ion-icon name="happy" 
+                                    class="points happy"
+                                    [@showPoint]="pointsState[0]"
+                                    (@showPoint.done)="showPointDone($event)">
+                                </ion-icon>
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon name="bowtie" 
+                                    class="points bowtie"
+                                    [@showPoint]="pointsState[1]"
+                                    (@showPoint.done)="showPointDone($event)">
+                                </ion-icon>
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon name="pizza" 
+                                    class="points pizza"
+                                    [@showPoint]="pointsState[2]"
+                                    (@showPoint.done)="showPointDone($event)">                
+                                </ion-icon>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </ion-item>
+            </ion-card>            
+        </ion-row>
+        <ion-row padding-top>
+            <ion-col col-2>
+                <br><br>
+                <div class="global-points">
+                    <ion-icon name="trophy"></ion-icon><span class="global-points"> {{globalPoints}}</span>
+                </div>
             </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="clockwatch" text-center>{{countdown}}</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col text-center>
-                Points: <span class="global-points"> {{globalPoints}}</span>
-            </ion-col>
-        </ion-row>
+            <ion-col offset-2 col-5>
+                <br><br>                
+                <final-countdown [options]="countdownOptions">
+                </final-countdown>
+            </ion-col>            
+        </ion-row>        
     </ion-grid>
 
-    <ion-fab left bottom>
+    <ion-fab right middle>
         <button *ngIf="!isPlaying" ion-fab color="secondary" (click)="start()">
             <ion-icon name="flash"></ion-icon>
         </button>
@@ -74,13 +78,9 @@
             <ion-icon name="square"></ion-icon>
         </button>
     </ion-fab>
-    <!-- <ion-fab center bottom>
-        <button ion-fab color="light" (click)="incrementPoint()">
+    <ion-fab center left>
+        <button ion-fab color="light" (click)="predictMock()">
             <ion-icon name="color-wand"></ion-icon>
-        </button>    
-    </ion-fab> -->
-    <!-- <small class="info-predictions">
-        classId: {{lastPrediction.class_id}} -.- 
-        confidence: {{lastPrediction.confidence}}% 
-    </small>  -->
+        </button>            
+    </ion-fab> 
 </ion-content>

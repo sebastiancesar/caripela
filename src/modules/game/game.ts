@@ -2,18 +2,26 @@ export class Game {
 
     faceLabels: Array<string>;    
     currentFace = 0;
-    private samplesAdded = {};        
+    private numClasses: number = 0;
+    private samples = [];
     private lastFace: any = { label: '', class_id: -1 };
 
     constructor (faces) {        
-        this.faceLabels = faces;
-        this.faceLabels.forEach((label, index) => {
-            this.samplesAdded[index] = 0;
-        });
+        this.faceLabels = faces;     
+        this.numClasses = this.faceLabels.length;
     }
     
-    getSamplesAdded () {
-        return this.samplesAdded;
+    isLastFace () : boolean {
+        return this.currentFace === this.faceLabels.length;
+    }
+    
+    getSamples () {
+        return this.samples;
+    }
+
+    samplesAdded (samplesHolder) : void {
+        samplesHolder.label = this.faceLabels[samplesHolder.classId];
+        this.samples.push(samplesHolder);
     }
 
     getNextFaceLabel () : string {
@@ -23,10 +31,10 @@ export class Game {
     }
 
     getRandomFace () {
-        let index = this.getRandom(0, 3);
+        let index = this.getRandom(0, this.numClasses);
         let newFace = { label: this.faceLabels[index], class_id: index };
         while (newFace.class_id === this.lastFace.class_id) {
-            index = this.getRandom(0, 3);
+            index = this.getRandom(0, this.numClasses);
             newFace = { label: this.faceLabels[index], class_id: index };            
         }
         this.lastFace = newFace;

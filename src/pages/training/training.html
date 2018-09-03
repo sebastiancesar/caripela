@@ -1,0 +1,45 @@
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center col-6>
+                <span class="face-label"> {{facesLabel[0].label}}</span>
+                <img [src]="facesLabel[0].sample">
+            </ion-col>    
+            <ion-col text-center col-6>
+                <span class="face-label"> {{facesLabel[1].label}}</span>
+                <img [src]="facesLabel[1].sample">
+            </ion-col>    
+        </ion-row>
+        <ion-row>
+            <ion-col text-center col-6>
+                <span class="face-label"> {{facesLabel[2].label}}</span>
+                <img [src]="facesLabel[2].sample">
+            </ion-col>    
+            <ion-col text-center col-6>
+                <span class="face-label"> {{facesLabel[3].label}}</span>
+                <img [src]="facesLabel[3].sample">
+            </ion-col>    
+        </ion-row>
+        <ion-row>
+            <ion-col *ngIf="training" text-center>
+                <div text-center>
+                    <h3 class="training-label">Training ...</h3>
+                    <img class="loading" src="/assets/imgs/loading.gif">
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col padding-top *ngIf="!training" text-center>
+                <h3 class="secondary start-label">
+                    Start
+                </h3>                
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-fab right bottom>        
+        <button ion-fab color="light" (click)="restart()">
+            <ion-icon name="square"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>
+        
