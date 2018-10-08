@@ -33,23 +33,18 @@
                     [max]="max"
                     [radius]="30"
                     [stroke]="5"
-                    [duration]="2000">
+                    [duration]="2500">
                 </round-progress>
             </ion-col>
         </ion-row>
     </ion-grid>
 
-    <ion-fab right middle>
+    <ion-fab left middle>
         <div *ngIf="showButton === 'capture'">
             <button ion-fab color="danger" (click)="capture()">
                 <ion-icon name="camera"></ion-icon>
             </button>
         </div>
-        <!-- <div *ngIf="showButton === 'next'">
-            <button ion-fab color="secondary" (click)="next()">
-                <ion-icon name="arrow-forward"></ion-icon>
-            </button>
-        </div> -->
     </ion-fab>
     <ion-fab right bottom>
         <button ion-fab color="light" (click)="reset()">

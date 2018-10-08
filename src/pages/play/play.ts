@@ -116,7 +116,7 @@ export class PlayPage {
         try {
             this.startedStream.unsubscribe();
             this.gameManager.stopObservable();
-            this.countdownApi.next({name: 'restart'});
+            this.countdownApi.next({name: 'reset'});
         } catch (err) {
             console.log('stopping');
         }

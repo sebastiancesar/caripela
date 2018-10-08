@@ -1,15 +1,24 @@
 <ion-content padding>
     <ion-grid>
         <ion-row>
-            <ion-col text-center col-6>
+            <ion-col text-center col-6 *ngFor="let i of labelsLength">
+                <div *ngIf="facesLabel[i]">
+                    <span class="face-label"> {{facesLabel[i].label}}</span>
+                    <img [src]="facesLabel[i].sample">
+                </div>
+                <div *ngIf="facesLabel[i]">
+                    Loading ...
+                </div>                
+            </ion-col>            
+            <!-- <ion-col text-center col-6>
                 <span class="face-label"> {{facesLabel[0].label}}</span>
                 <img [src]="facesLabel[0].sample">
             </ion-col>    
             <ion-col text-center col-6>
                 <span class="face-label"> {{facesLabel[1].label}}</span>
                 <img [src]="facesLabel[1].sample">
-            </ion-col>    
-        </ion-row>
+            </ion-col>     -->
+        <!-- </ion-row>
         <ion-row>
             <ion-col text-center col-6>
                 <span class="face-label"> {{facesLabel[2].label}}</span>
@@ -18,7 +27,7 @@
             <ion-col text-center col-6>
                 <span class="face-label"> {{facesLabel[3].label}}</span>
                 <img [src]="facesLabel[3].sample">
-            </ion-col>    
+            </ion-col>     -->
         </ion-row>
         <ion-row>
             <ion-col *ngIf="training" text-center>

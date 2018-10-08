@@ -9,7 +9,7 @@ const INTERVAL_BETWEEN_CAPTURE = 500; // ms
 export class Reco {
   
     captureService: CaptureBrowserService;
-    server: any;
+    server: RecoServerRemote;
     startedInterval: any;
     predictedClass: number;
     predictedClassConfidence: number;
@@ -24,10 +24,14 @@ export class Reco {
         this.server = new RecoServerRemote();                
     }
   
+    initSession () {
+        return this.server.initSession();
+    }
+
     reset(): void {
         this.server.reset();
     }
-
+    
     addSamples (classId) {
         let samplesHolder = { classId: classId, samples: [] };
         return new Promise((resolve, reject) => {
@@ -55,7 +59,7 @@ export class Reco {
         this.predictSubscription.unsubscribe();
     }
 
-    train () {
+    train () : Promise<void> {
         return this.server.train();
     }
 

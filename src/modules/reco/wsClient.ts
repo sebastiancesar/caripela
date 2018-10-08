@@ -7,6 +7,7 @@ export class RecoWsClient {
     
     constructor () {
         this.roomId = 'clientRoom';
+        //this.ws = io.connect('https://multipurpose.ga:5000');
         this.ws = io.connect('https://192.168.0.155:5000');
     }
 

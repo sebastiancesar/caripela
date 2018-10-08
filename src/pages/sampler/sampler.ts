@@ -2,6 +2,7 @@ import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { GameManager } from '../../modules/game/gameManager';
 import { TrainingPage } from '../training/training';
+import { LandingPage } from '../landing/landing';
 
 
 @Component({
@@ -49,6 +50,11 @@ export class SamplerPage {
             this.faceLabel = nextFace;
         }
         this.showButton = 'capture';
+    }
+
+    reset () {
+        this.gameManager.reset();
+        this.navCtrl.push(LandingPage);
     }
 }
   
