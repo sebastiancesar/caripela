@@ -11,7 +11,7 @@ export class GameManager {
     private captureService: CaptureBrowserService;
     private currentGame: Game;
     private reco: Reco;
-    private samplesPerClass: any = {};
+    private samplesPerClass: Array<any> = [];
 
     constructor (captureService: CaptureBrowserService) {
         this.captureService = captureService;
@@ -22,8 +22,10 @@ export class GameManager {
         return this.captureService.setup();        
     }
     
-    createNewGame () : Game {
-        return this.reset();        
+    initSession () : Game {
+        this.reco.initSession();
+        // this.onSampleClassCompleted();
+        return this.reset();
     }
 
     reset () : Game {
@@ -66,8 +68,20 @@ export class GameManager {
         return 'data:image/jpeg;base64,' + img;
     }
 
+    // onSampleClassCompleted () {
+    //     return this.reco.onClassSamplesCompleted()
+    //         .subscribe((imageClass: any) => {
+    //             let sampleHolder = { 
+    //                 class_id: imageClass.class_id, 
+    //                 label: BASIC_FACES[parseInt(imageClass.class_id)], 
+    //                 sample: 'data:image/jpeg;base64,' + imageClass.image 
+    //             };
+    //             this.samplesPerClass.push(sampleHolder);                
+    //         });            
+    // }
+
     addSamples (faceLabel) {        
-        const classId = this.getClassIdForLabel(faceLabel);
+        const classId = this.getClassIdForLabel(faceLabel);       
         return this.reco.addSamples(classId)
             .then((samplesHolder) => {
                 this.currentGame.samplesAdded(samplesHolder);
@@ -77,7 +91,22 @@ export class GameManager {
     train () {
         return this.reco.train();            
     }
-    
+
+    // getClassesImg () : Promise<Array<void>> {
+    //     return this.reco.getClassesImg()
+    //         .then((img_classes: any) => {
+    //             let result = [];
+    //             for (const key in Object.keys(img_classes)) {
+    //                 let sampleHolder = { 
+    //                     class_id: key, 
+    //                     label: BASIC_FACES[parseInt(key)], 
+    //                     sample: 'data:image/jpeg;base64,' + img_classes[key] };
+    //                 result.push(sampleHolder);
+    //             }                    
+    //             return result;
+    //         });
+    // }
+
     startObservable () {
         return this.reco.startObservable();
     }

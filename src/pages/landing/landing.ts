@@ -21,7 +21,7 @@ export class LandingPage {
     constructor (navCtrl: NavController, platform: Platform, gameManager: GameManager) {
         this.navCtrl = navCtrl;
         this.gameManager = gameManager;
-        this.gameManager.createNewGame();
+        
         platform.ready()
             .then(() => {                
                 this.init();
@@ -41,6 +41,7 @@ export class LandingPage {
     }
     
     start () {
+        this.gameManager.initSession();
         this.navCtrl.push(SamplerPage);
     }
 
