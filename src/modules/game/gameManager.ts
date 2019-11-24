@@ -7,123 +7,126 @@ const BASIC_FACES = ['Nabo', 'Bragueta', 'Mamerto', 'Zapallo'];
 
 @Injectable()
 export class GameManager {
-    
-    private captureService: CaptureBrowserService;
-    private currentGame: Game;
-    private reco: Reco;
-    private samplesPerClass: Array<any> = [];
 
-    constructor (captureService: CaptureBrowserService) {
-        this.captureService = captureService;
-        this.reco = new Reco(this.captureService);
-    }
-    
-    init () {
-        return this.captureService.setup();        
-    }
-    
-    initSession () : Game {
-        this.reco.initSession();
-        // this.onSampleClassCompleted();
-        return this.reset();
-    }
+  private captureService: CaptureBrowserService;
+  private currentGame: Game;
+  private reco: Reco;
+  private samplesPerClass: Array < any > = [];
 
-    reset () : Game {
-        this.reco.reset();
-        let game = new Game(BASIC_FACES);
-        this.currentGame = game;
-        return game;
-    }
+  constructor(captureService: CaptureBrowserService) {
+    this.captureService = captureService;
+    this.reco = new Reco(this.captureService);
+  }
 
-    getVideoSource () {
-        return this.captureService.getVideoSrc();
-    }
+  init() {
+    return this.captureService.setup();
+  }
 
-    getNextFaceLabel () : string {
-        if (this.currentGame.isLastFace()) {
-            this.prepareSamplesPerClass();
-            return 'end';
-        }        
-        return this.currentGame.getNextFaceLabel();
+  initSession(): Game {
+    this.reco.initSession();
+    return this.reset();
+  }
+
+  reset(): Game {
+    this.reco.reset();
+    let game = new Game(BASIC_FACES);
+    this.currentGame = game;
+    return game;
+  }
+
+  getWebcamStream(): MediaStream {
+    return this.captureService.getWebcamStream();
+  }
+
+  getNextFaceLabel(): string {
+    if (this.currentGame.isLastFace()) {
+      this.prepareSamplesPerClass();
+      return 'end';
     }
-    
-    getSamplesPerClass () {
-        return this.samplesPerClass;
-    }
-    
-    private prepareSamplesPerClass () {
-        let samples = this.currentGame.getSamples();
-        
-        for (let index in samples) {
-            let sampleHolder = { class_id: index, label: samples[index].label, sample: '' };
-            sampleHolder.sample = this.getImage(samples[index]);
-            this.samplesPerClass[index] = sampleHolder;
-        }
-            
-        return this.samplesPerClass;
-    }
-    
-    private getImage (sampleHolder) {
-        let img = sampleHolder.samples[10];        
-        return 'data:image/jpeg;base64,' + img;
+    return this.currentGame.getNextFaceLabel();
+  }
+
+  getSamplesPerClass() {
+    return this.samplesPerClass;
+  }
+
+  private prepareSamplesPerClass() {
+    let samples = this.currentGame.getSamples();
+
+    for (let index in samples) {
+      let sampleHolder = {
+        class_id: index,
+        label: samples[index].label,
+        sample: ''
+      };
+      sampleHolder.sample = this.getImage(samples[index]);
+      this.samplesPerClass[index] = sampleHolder;
     }
 
-    // onSampleClassCompleted () {
-    //     return this.reco.onClassSamplesCompleted()
-    //         .subscribe((imageClass: any) => {
-    //             let sampleHolder = { 
-    //                 class_id: imageClass.class_id, 
-    //                 label: BASIC_FACES[parseInt(imageClass.class_id)], 
-    //                 sample: 'data:image/jpeg;base64,' + imageClass.image 
-    //             };
-    //             this.samplesPerClass.push(sampleHolder);                
-    //         });            
-    // }
+    return this.samplesPerClass;
+  }
 
-    addSamples (faceLabel) {        
-        const classId = this.getClassIdForLabel(faceLabel);       
-        return this.reco.addSamples(classId)
-            .then((samplesHolder) => {
-                this.currentGame.samplesAdded(samplesHolder);
-            });
-    }
+  private getImage(sampleHolder) {
+    let img = sampleHolder.samples[10];
+    return 'data:image/jpeg;base64,' + img;
+  }
 
-    train () {
-        return this.reco.train();            
-    }
+  // onSampleClassCompleted () {
+  //     return this.reco.onClassSamplesCompleted()
+  //         .subscribe((imageClass: any) => {
+  //             let sampleHolder = { 
+  //                 class_id: imageClass.class_id, 
+  //                 label: BASIC_FACES[parseInt(imageClass.class_id)], 
+  //                 sample: 'data:image/jpeg;base64,' + imageClass.image 
+  //             };
+  //             this.samplesPerClass.push(sampleHolder);                
+  //         });            
+  // }
 
-    // getClassesImg () : Promise<Array<void>> {
-    //     return this.reco.getClassesImg()
-    //         .then((img_classes: any) => {
-    //             let result = [];
-    //             for (const key in Object.keys(img_classes)) {
-    //                 let sampleHolder = { 
-    //                     class_id: key, 
-    //                     label: BASIC_FACES[parseInt(key)], 
-    //                     sample: 'data:image/jpeg;base64,' + img_classes[key] };
-    //                 result.push(sampleHolder);
-    //             }                    
-    //             return result;
-    //         });
-    // }
+  addSamples(faceLabel) {
+    const classId = this.getClassIdForLabel(faceLabel);
+    return this.reco.addSamples(classId)
+      .then((samplesHolder) => {
+        this.currentGame.samplesAdded(samplesHolder);
+      });
+  }
 
-    startObservable () {
-        return this.reco.startObservable();
-    }
-    
-    stopObservable () {
-        return this.reco.stopObservable();
-    }
- 
-    getFacesLabel () {
-        return BASIC_FACES;
-    }
+  train() {
+    return this.reco.train();
+  }
 
-    getRandomFace () {
-        return this.currentGame.getRandomFace();
-    }
+  // getClassesImg () : Promise<Array<void>> {
+  //     return this.reco.getClassesImg()
+  //         .then((img_classes: any) => {
+  //             let result = [];
+  //             for (const key in Object.keys(img_classes)) {
+  //                 let sampleHolder = { 
+  //                     class_id: key, 
+  //                     label: BASIC_FACES[parseInt(key)], 
+  //                     sample: 'data:image/jpeg;base64,' + img_classes[key] };
+  //                 result.push(sampleHolder);
+  //             }                    
+  //             return result;
+  //         });
+  // }
 
-    private getClassIdForLabel (label) {
-        return BASIC_FACES.indexOf(label);
-    }
+  startObservable() {
+    return this.reco.startObservable();
+  }
+
+  stopObservable() {
+    return this.reco.stopObservable();
+  }
+
+  getFacesLabel() {
+    return BASIC_FACES;
+  }
+
+  getRandomFace() {
+    return this.currentGame.getRandomFace();
+  }
+
+  private getClassIdForLabel(label) {
+    return BASIC_FACES.indexOf(label);
+  }
 }
