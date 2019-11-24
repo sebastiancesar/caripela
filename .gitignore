@@ -11,7 +11,9 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-
+.cert.pem
+.key.pem
+.builds
 .idea/
 .ionic/
 .sourcemaps/
